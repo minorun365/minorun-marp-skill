@@ -3,7 +3,7 @@
 
 使い方: python3 tools/check-dark-margins.py <deck.pdf> [--bottom 60] [--right 60]
 仕組み: 各ページを 1280x720 相当（100dpi 相当）に焼き、黒（背景）でないピクセルの最下行・最右列を取る。
-       右下のページ番号（幅 140px・高さ 48px の隅）は除外する。全面画像の枚（bg cover）と、表紙のように下端まで帯を敷いた枚は対象外。
+       右下のページ番号（幅 140px・高さ 48px の隅）は除外する。全面画像のスライド（bg cover）と、表紙のように下端まで帯を敷いたスライドは対象外。
        必要なもの: pdftoppm（poppler）、Pillow
 """
 import sys, subprocess, tempfile, os, glob
@@ -34,7 +34,7 @@ for f in sorted(glob.glob(os.path.join(tmp, 'p-*.png'))):
                 if y > maxy: maxy = y
                 if x > maxx: maxx = x
     if maxy < 0: continue
-    # 表紙の帯のように、最下行がほぼ全幅で塗られている枚は意図した全面の面なので対象外
+    # 表紙の帯のように、最下行がほぼ全幅で塗られているスライドは意図した全面の面なので対象外
     if maxy == H - 1 and sum(1 for x in range(0, W, 4) if px[x, H - 1] >= 40) > (W // 4) * 0.9:
         continue
     bottom = round((H - 1 - maxy) * sx); right = round((W - 1 - maxx) * sx)

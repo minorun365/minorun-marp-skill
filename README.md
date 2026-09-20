@@ -34,7 +34,7 @@ python3 tools/check-dark-margins.py deck.pdf    # 中身の下端と右端の空
 python3 tools/check-dark-gaps.py deck.pdf       # 図や箱と、隣の本文の間隔
 python3 tools/check-figure-text.py deck.pdf     # 図の中の小さい文字、箱の縁に詰まった文字
 node tools/check-svg-box-fit.mjs images/*.svg   # SVGの文字が箱に収まっているか
-python3 tools/check-reuse-diff.py new.md old.md # 流用した枚の、見出しと図の対応
+python3 tools/check-reuse-diff.py new.md old.md # 流用したスライドの、見出しと図の対応
 ```
 
 検査スクリプトが使うもの:
