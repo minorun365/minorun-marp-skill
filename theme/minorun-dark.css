@@ -1,0 +1,281 @@
+/* @theme minorun-dark */
+
+@import 'default';
+
+/* ===================================================
+   Dark Theme - Cyan Accent
+   真っ黒背景 + シアンのアクセントカラー
+   =================================================== */
+
+/* ===== ベーススタイル ===== */
+section {
+  background: #000000;
+  color: #ffffff;
+  /* 丸ゴシック系を想定。Zen Maru Gothic（Google Fonts・OFL）を入れておくと作者の見た目に近い。
+     未導入の macOS ではヒラギノ丸ゴへフォールバックする */
+  font-family: 'Zen Maru Gothic', 'Hiragino Maru Gothic ProN', 'Helvetica Neue', Arial, sans-serif;
+  font-size: 24pt;
+  padding: 2.5rem 3rem;
+  align-content: start;
+  /* コンテンツを上揃え */
+}
+
+/* ===== 見出し ===== */
+h1 {
+  color: #00c4e4;
+  font-size: 36pt;
+  margin-bottom: 0.5em;
+}
+
+h2 {
+  color: #00c4e4;
+  font-size: 28pt;
+}
+
+h3 {
+  color: #5ec4d0;
+  font-size: 26pt;
+}
+
+/* ===== 本文 ===== */
+p, li {
+  color: #ffffff;
+  font-size: 26pt;
+  line-height: 1.6;
+}
+
+strong {
+  color: #ffff00 !important;
+}
+
+em {
+  color: #a8e0e8;
+}
+
+a {
+  color: #00c4e4;
+  text-decoration: underline;
+}
+
+/* ===== リスト ===== */
+ul, ol {
+  margin-left: 0.5em;
+}
+
+ul li::marker {
+  color: #ffffff;
+}
+
+ol li::marker {
+  color: #ffffff;
+}
+
+/* ===== コードブロック ===== */
+code {
+  background-color: #ffffff;
+  color: #1e1e2e;
+  border-radius: 4px;
+  padding: 0.1em 0.3em;
+}
+
+pre {
+  background-color: #ffffff !important;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 2px 12px rgba(255, 255, 255, 0.15);
+}
+
+pre code {
+  color: #1e1e2e;
+  background-color: transparent;
+}
+
+/* シンタックスハイライト（白背景用） */
+pre .hljs-keyword,
+pre .hljs-selector-tag { color: #8839ef; }
+
+pre .hljs-string,
+pre .hljs-attr { color: #40a02b; }
+
+pre .hljs-comment,
+pre .hljs-quote { color: #9ca0b0; font-style: italic; }
+
+pre .hljs-title,
+pre .hljs-title.function_ { color: #1e66f5; }
+
+pre .hljs-number,
+pre .hljs-literal { color: #fe640b; }
+
+pre .hljs-built_in,
+pre .hljs-type { color: #df8e1d; }
+
+pre .hljs-params { color: #e64553; }
+
+pre .hljs-meta { color: #ea76cb; }
+
+/* ===== テーブル ===== */
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th {
+  background-color: #555;
+  color: #ffffff;
+  font-weight: bold;
+  padding: 0.5em 1em;
+}
+
+td {
+  padding: 0.5em 1em;
+  border-bottom: 1px solid #ccc;
+  background-color: #d0d0d0;
+  color: #222;
+}
+
+/* ===== 引用 ===== */
+blockquote {
+  border-left: 4px solid #00c4e4;
+  padding: 10px 20px;
+  background-color: #0a0a1a;
+  color: #b0b0b0;
+  font-style: italic;
+  margin: 1em 0;
+}
+
+/* ===== 水平線 ===== */
+hr {
+  border: none;
+  border-top: 1px solid #333;
+}
+
+/* ===== ページ番号 ===== */
+section::after {
+  color: #555;
+  font-size: 14pt;
+}
+
+/* ===== ヘッダー / フッター ===== */
+header {
+  color: #666;
+  font-size: 0.5em;
+}
+
+footer {
+  color: #666;
+  font-size: 0.5em;
+}
+
+/* ======================================================
+   レイアウトクラス
+   ====================================================== */
+
+/* ---------------------------------------------------
+   top: タイトルスライド
+   タイトルは中央、下1/3にシアンの帯 + 白太字で所属・名前
+   --------------------------------------------------- */
+section.top {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  align-content: center;
+  position: relative;
+  background: linear-gradient(to bottom, #000000 60%, #00c4e4 60%);
+}
+
+section.top::before {
+  display: none;
+}
+
+section.top h1 {
+  border-bottom: none;
+  font-size: 52pt;
+  margin-bottom: 0;
+  position: relative;
+  z-index: 1;
+  color: #ffffff;
+}
+
+section.top p {
+  color: #ffffff !important;
+  font-size: 40pt;
+  font-weight: bold;
+  margin: 0 !important;
+  padding: 0 3rem;
+  z-index: 1;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+section.top::after {
+  display: none;
+}
+
+/* ---------------------------------------------------
+   crosshead: 仕切りスライド
+   黒背景 + 上下中央揃え + 白文字
+   問いかけやセクション区切りに使用
+   --------------------------------------------------- */
+section.crosshead {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  align-content: center;
+}
+
+section.crosshead h1 {
+  color: #ffffff;
+  border-bottom: none;
+  font-size: 44pt;
+}
+
+section.crosshead::after {
+  display: none;
+}
+
+/* ---------------------------------------------------
+   image-full: タイトル + 大きな画像
+   シアンのタイトルが1行、その下に画像がドーンと入る
+   --------------------------------------------------- */
+section.image-full {
+  padding-top: 1.5rem;
+  padding-bottom: 1rem;
+}
+
+section.image-full h1 {
+  font-size: 36pt;
+  margin-bottom: 0.2em;
+  padding-bottom: 0.1em;
+}
+
+section.image-full p {
+  text-align: center;
+  margin: 0;
+}
+
+section.image-full img {
+  display: block;
+  margin: 0 auto;
+  max-height: 480px;
+  object-fit: contain;
+}
+
+/* ---------------------------------------------------
+   split: 左テキスト60% + 右画像40%
+   Marp組み込みの bg right:40% と組み合わせて使用
+
+   使い方:
+   <!-- _class: split -->
+   # タイトル
+   テキスト説明...
+   ![bg right:40% contain](./image.png)
+   --------------------------------------------------- */
+section.split h1 {
+  font-size: 36pt;
+}
+
+section.split p, section.split li {
+  font-size: 26pt;
+}

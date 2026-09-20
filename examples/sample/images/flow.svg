@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 250" font-family="'Zen Maru Gothic','Hiragino Maru Gothic ProN',sans-serif">
+  <defs>
+    <marker id="arw" markerUnits="userSpaceOnUse" markerWidth="18" markerHeight="18" refX="16" refY="9" orient="auto">
+      <path d="M0 0L18 9L0 18z" fill="#7fe3f5"/>
+    </marker>
+  </defs>
+  <rect x="20" y="70" width="260" height="120" rx="18" fill="#1f1f27"/>
+  <text x="150" y="141" text-anchor="middle" font-size="30" fill="#ffffff">話を決める</text>
+  <line x1="292" y1="130" x2="368" y2="130" stroke="#7fe3f5" stroke-width="4" marker-end="url(#arw)"/>
+  <rect x="380" y="70" width="240" height="120" rx="18" fill="#1f1f27"/>
+  <text x="500" y="141" text-anchor="middle" font-size="30" fill="#ffffff">書き出す</text>
+  <line x1="632" y1="130" x2="708" y2="130" stroke="#7fe3f5" stroke-width="4" marker-end="url(#arw)"/>
+  <rect x="720" y="70" width="260" height="120" rx="18" fill="#00849c"/>
+  <text x="850" y="141" text-anchor="middle" font-size="30" font-weight="700" fill="#ffffff">測って、見る</text>
+</svg>
