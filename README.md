@@ -60,3 +60,5 @@ sh examples/sample/fetch-illustrations.sh
 ## License
 
 Apache License 2.0. Copyright 2026 Minoru Onda
+
+見本デッキの一覧画像に写っている挿絵は「いらすとや」の著作物で、このライセンスの対象外です。
