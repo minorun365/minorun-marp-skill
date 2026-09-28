@@ -17,15 +17,24 @@ AIにスライドを書かせると、体裁は整うのに話が薄くなりが
 | `tools/` | 書き出したPDFとSVGを実測する検査スクリプト |
 | `examples/sample` | 見本デッキ。`examples/broken` は検査が反応することを確かめるための、わざと崩した版 |
 
-## 使い方
+## 入れ方
 
-Claude Code で使うなら、`skills/` の3つを自分のスキル置き場へコピーします。
+Claude デスクトップアプリの「Code」タブ（または Claude Code）で、このURLを渡して頼むだけです。
 
-```bash
-cp -r skills/* ~/.claude/skills/
-```
+> https://github.com/minorun365/minorun-marp-skill のスキルを入れて
 
-テーマと検査スクリプトは、スライドを置くリポジトリへ `theme/` と `tools/` ごとコピーしてください。
+入れ終わったら新しいセッションを始め、「黒地のテーマで、勉強会の20分のスライドを作って」のように頼むと使われます。新しい版が出たときは「minorun-marp-skill を最新にして」で更新できます。
+
+## インストールを頼まれた Claude へ
+
+この節は Claude が読むための手順です。自分で入れる人も、この順に進めれば入れられます。
+
+1. リポジトリを `~/.claude/skill-repos/minorun-marp-skill` へ置く。無ければ `git clone`、あれば `git pull`
+2. `skills/` の3つ（`slide-story` `slide-figures` `slide-design-dark`）を `~/.claude/skills/` へコピーする。同じ名前があれば上書きする
+3. 書き出しと検査に使う道具があるかを確かめ、無いものを入れる。[Marp CLI](https://github.com/marp-team/marp-cli)（`npm i -g @marp-team/marp-cli`）、Google Chrome、poppler と mupdf-tools（macOS なら `brew install poppler mupdf-tools`）、Python 3 と Pillow。`check-svg-box-fit.mjs` は Marp CLI 同梱の puppeteer-core を借りるので、場所が違う環境では `MARP_NODE_MODULES` と `CHROME_PATH` で指定する
+4. 結果は、何が使えるようになったかと頼み方の例を、コマンドを見せずに平易な言葉で伝える
+
+スライドを作るときは、`~/.claude/skill-repos/minorun-marp-skill` から `theme/` と `tools/` を作業フォルダへコピーして使う。
 
 ```bash
 marp --no-stdin deck.md --pdf --theme theme/minorun-dark.css --allow-local-files
@@ -35,15 +44,8 @@ python3 tools/check-dark-gaps.py deck.pdf       # 図や箱と、隣の本文の
 python3 tools/check-figure-text.py deck.pdf     # 図の中の小さい文字、箱の縁に詰まった文字
 node tools/check-svg-box-fit.mjs images/*.svg   # SVGの文字が箱に収まっているか
 python3 tools/check-reuse-diff.py new.md old.md # 流用したスライドの、見出しと図の対応
+python3 tools/check-ai-smell.py deck.md         # 書き換えたスライドの文の型の反復
 ```
-
-検査スクリプトが使うもの:
-
-- [Marp CLI](https://github.com/marp-team/marp-cli)（`npm i -g @marp-team/marp-cli`）と Google Chrome
-- poppler（`pdftoppm` `pdfinfo`）と mupdf-tools（`mutool`）。macOS なら `brew install poppler mupdf-tools`
-- Python 3 と Pillow
-
-`check-svg-box-fit.mjs` は Marp CLI に同梱の puppeteer-core を借ります。場所が違う環境では `MARP_NODE_MODULES` と `CHROME_PATH` で指定できます。
 
 ## フォント
 
