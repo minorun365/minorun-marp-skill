@@ -153,7 +153,7 @@ rg -n -i '#00c4e4|#5ec4d0|#a8e0e8' deck.md images/*.svg
 テーマ既定のグレー地の表も、黒いカード地にテーマ色の小見出しを付けた表も、洗練されて見えなかった。通ったのは、地を塗らず細い罫だけの形。
 
 ```css
-table { width:100%; border-collapse:collapse !important; background:transparent !important; border:none !important; font-size:22pt; }
+table { display:table !important; width:100% !important; border-collapse:collapse !important; background:transparent !important; border:none !important; font-size:22pt; }
 table thead, table tbody, table tr { background:transparent !important; border:none !important; }
 table th { background:transparent !important; color:#a09aa4 !important; font-weight:600; font-size:18pt; letter-spacing:.06em;
   text-align:left; padding:0 .7em .55em; border:none !important; border-bottom:1px solid #3a3640 !important; }
@@ -164,6 +164,7 @@ table td:first-child { color:#ffffff !important; font-weight:700; white-space:no
 ```
 
 - `td` だけを透明にすると、テーマ既定の `tr` の背景が透けて、白地に白文字になる。`table / thead / tbody / tr` にも必ず当てる
+- 表の幅は `display: table !important` と `width: 100% !important` の両方を書く。Marp 既定の `display:block; width:max-content` が残り、`width:100%` だけでは版面の7割で止まる
 - セルは1行に収める。`white-space: nowrap` を当てて、はみ出したら文言を削る。自動の折り返しに任せると、最後の1文字だけが2行目に落ちる
 - 列に色の階層をつける。1列目は白の太字、説明の列はグレー、主役の列はテーマ色の太字。全部が白だと、どこを見ればよいか分からない
 - 注目させる行は薄い黄色の網掛け（`rgba(255,226,120,.16)`）。6行以上の比較表では必須
@@ -209,15 +210,12 @@ table td:first-child { color:#ffffff !important; font-weight:700; white-space:no
 
 ### 結論と引用の箱
 
-結論や引用の箱を、明るい色のベタ塗りに濃い色の文字で作らない。黒地では浮いて見える。薄い網掛けも沈んで読めない。面は半透明の白を上から下へ薄くしていくガラス調にして、テーマ色は細い線だけに使う。文字は白系の太字にする。
+結論や引用の箱を、明るい色のベタ塗りに濃い色の文字で作らない。黒地では浮いて見える。薄い網掛けも沈んで読めない。半透明の白を重ねたガラス調の面も、黒地に溶けて、本文と本文のあいだに仕切り線があるだけに見える。結論は補足ボックスと同じ濃い灰色のベタ塗りに白の太字、引用は左端のテーマ色の縦線で分ける。
 
 ```css
-/* 結論：ガラス調の面に、上端のテーマ色の線 */
-.callout { position: relative; border-radius: 16px; padding: 22px 40px;
-           background: linear-gradient(165deg, rgba(255,255,255,.10), rgba(255,255,255,.045));
-           border: 1px solid rgba(255,255,255,.14); box-shadow: 0 18px 44px rgba(0,0,0,.45); overflow: hidden; }
-.callout::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 3px;
-                   background: linear-gradient(90deg, #00c4e4, rgba(0,196,228,0)); }
+/* 結論：濃い灰色のベタ塗りに白の太字 */
+.callout { width: 88%; margin: 0 auto; border-radius: 18px; padding: 22px 40px;
+           background: #555561; color: #ffffff; font-weight: 700; text-align: center; }
 /* 引用：枠線なし。左端のテーマ色の縦線 */
 .quote { position: relative; border-radius: 4px 12px 12px 4px; padding: 18px 36px;
          background: linear-gradient(180deg, rgba(255,255,255,.075), rgba(255,255,255,.02)); }
@@ -226,6 +224,22 @@ table td:first-child { color:#ffffff !important; font-weight:700; white-space:no
 ```
 
 箱の形は好みが割れやすい。同じスライドに2〜3案を当てて並べ、選んでもらう。
+
+吹き出しやコラムの箱は、箱の幅を文字に合わせ、段落の間を空ける。
+
+- 箱は `width: fit-content; max-width: 100%` にする。幅いっぱいの箱に短い行を並べると、右側だけ空いて左に寄って見える
+- 改行は読点の位置で、箱の幅いっぱいまで使って入れる。1行10字台の行を5行積まない。2文あるなら、まず1行に2文を並べられないかを見る
+- 箱の中に段落が2つあるときは、Markdown を空行で区切って `<p>` を2つにし、`p + p { margin-top: 14px; }` で間を空ける。`p { margin: 0 }` のまま改行だけで続けない
+- 書き出したら、箱のあるページを全部並べて見る
+
+### 白地の図から黒地の図を作るときは、白地の最新版と突き合わせる
+
+黒地の図は、白地の図の色を替えて作ることが多い。すると、白地の側に後から入った直し（配置の変更、サブラベルの撤去、窮屈さの解消）が黒地版へ届かない。
+
+- 作る前と登壇前に、白地版と黒地版の図を、文字と rect の座標で1組ずつ比べる。色は違って当然なので比べない。違いが出たら、どちらが新しい直しかを履歴で確かめて新しいほうへ寄せる。黒地版のほうが良いとき（文字が大きいなど）だけ残す
+- 色替えのとき、下の面と同じ色を上の図形に当てていないかを `tools/check-svg-contrast.mjs` で測る。吹き出しを箱と同じ暗いグラデーションで塗ると消える
+- `--png <dir>` で黒地の上に大きく描き出し、1点ずつ目で見る。スライドに縮めた状態では、吹き出しの潰れも枠からのはみ出しも見えない
+- 白地のテーマから派生したデッキは、ページごとの `<style scoped>` に残った白地用の文字色も消す。濃い紺やグレーの文字色は、黒地ではほぼ読めない。白地のテーマで使っていた色コードを `rg -n -i` で引いて0件にする
 
 ### 比較のスライドは大きい数字を2つだけ
 
@@ -254,6 +268,7 @@ table td:first-child { color:#ffffff !important; font-weight:700; white-space:no
 
 - div の中でMarkdownの強調を効かせるには、開きタグの直後と閉じタグの直前に空行を入れる
 - `</div>` の直後に空行なしで `---` を書くと、スライドの区切りとして認識されず、ページが1つ減る。スクリプトでタグを削除したあとは、ページ数を確かめる
+- 普通の本文の行の直後も同じ。空行なしで `---` が続くと、Markdown がその行を見出し（setext 見出し）として読み、前後2つのスライドが1ページにくっつく。スクリプトでスライドを差し込む・入れ替えるときは、区切りを必ず `\n\n---\n\n` にする
 - `<img>` のインライン `style` 属性は落とされる。クラスで書く
 - mdを `\n---\n` で分割すると、先頭はフロントマターになる。最初のスライドは2番目の要素で、そこにはデッキ全体の `<style>` が同居していることが多い。表紙を作り直すつもりで丸ごと置き換えると、全ページのスタイルが消える。症状は表紙ではなく他のページに出る
 - スクリプトでスライドを削除や挿入するときは、番号の降順で処理する。実行前に、対象の中身を `assert` で確かめる
@@ -277,6 +292,7 @@ python3 tools/check-dark-margins.py deck.pdf          # 中身の下端と右端
 python3 tools/check-dark-gaps.py deck.pdf             # 画像、図、コードの箱と隣の本文の間隔。36px未満でNG
 python3 tools/check-figure-text.py deck.pdf           # 図の中の16pt未満の文字、縁まで14px未満の文字
 node tools/check-svg-box-fit.mjs images/*.svg         # SVGを描画して文字と枠の余白を実測
+node tools/check-svg-contrast.mjs images/*.svg --png /tmp/svg   # 図形と真下の面の明度比。1.25未満でNG
 ```
 
 黒地の下端は、テキストの位置ではなく、黒でないピクセルの最下行で測る。コードの箱も図も挿絵も拾える。
@@ -291,7 +307,7 @@ NGは全件を列挙してから要約する。先に要約すると、3件目�
 pdftoppm -png -r 55 deck.pdf /tmp/all/p    # 全ページを小さく焼き、数ページずつ貼り合わせて順に見る
 ```
 
-目視でしか捕まらないものは、文字と挿絵や図形の重なり、下方向の余白のつぶれ、矢印の軸が隠れて矢尻しか見えない状態、見出しの大きさや位置のページ間の不揃い、不自然な改行、挿絵の入れ忘れである。
+目視でしか捕まらないものは、文字と挿絵や図形の重なり、下方向の余白のつぶれ、矢印の軸が隠れて矢尻しか見えない状態、見出しの大きさや位置のページ間の不揃い、不自然な改行、挿絵の入れ忘れ、挿絵とキャプションの密着、リード文と図形の間隔の詰まり、本文が左へ寄って右が空く配置である。
 
 吹き出しのしっぽ、矢印、帯のように、別の図形を要素の上に重ねたものは、縮小した全ページ画像では合格に見える。崩れるのは付け根や継ぎ目の数pxで、そこは縮小画像では1〜2ピクセルにつぶれている。重ねたページだけ高解像度で焼き直し、付け根の周囲を300%に拡大して見る。
 

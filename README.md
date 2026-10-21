@@ -31,7 +31,7 @@ Claude デスクトップアプリの「Code」タブ（または Claude Code）
 
 1. リポジトリを `~/.claude/skill-repos/minorun-marp-skill` へ置く。無ければ `git clone`、あれば `git pull`
 2. `skills/` の3つ（`slide-story` `slide-figures` `slide-design-dark`）を `~/.claude/skills/` へコピーする。同じ名前があれば上書きする
-3. 書き出しと検査に使う道具があるかを確かめ、無いものを入れる。[Marp CLI](https://github.com/marp-team/marp-cli)（`npm i -g @marp-team/marp-cli`）、Google Chrome、poppler と mupdf-tools（macOS なら `brew install poppler mupdf-tools`）、Python 3 と Pillow。`check-svg-box-fit.mjs` は Marp CLI 同梱の puppeteer-core を借りるので、場所が違う環境では `MARP_NODE_MODULES` と `CHROME_PATH` で指定する
+3. 書き出しと検査に使う道具があるかを確かめ、無いものを入れる。[Marp CLI](https://github.com/marp-team/marp-cli)（`npm i -g @marp-team/marp-cli`）、Google Chrome、poppler と mupdf-tools（macOS なら `brew install poppler mupdf-tools`）、Python 3 と Pillow。`check-svg-box-fit.mjs` と `check-svg-contrast.mjs` は Marp CLI 同梱の puppeteer-core を借りるので、場所が違う環境では `MARP_NODE_MODULES` と `CHROME_PATH` で指定する
 4. 結果は、何が使えるようになったかと頼み方の例を、コマンドを見せずに平易な言葉で伝える
 
 スライドを作るときは、`~/.claude/skill-repos/minorun-marp-skill` から `theme/` と `tools/` を作業フォルダへコピーして使う。
@@ -43,6 +43,7 @@ python3 tools/check-dark-margins.py deck.pdf    # 中身の下端と右端の空
 python3 tools/check-dark-gaps.py deck.pdf       # 図や箱と、隣の本文の間隔
 python3 tools/check-figure-text.py deck.pdf     # 図の中の小さい文字、箱の縁に詰まった文字
 node tools/check-svg-box-fit.mjs images/*.svg   # SVGの文字が箱に収まっているか
+node tools/check-svg-contrast.mjs images/*.svg  # SVGの図形が下の面と同じ色で沈んでいないか
 python3 tools/check-reuse-diff.py new.md old.md # 流用したスライドの、見出しと図の対応
 python3 tools/check-ai-smell.py deck.md         # 書き換えたスライドの文の型の反復
 ```

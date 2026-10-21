@@ -32,7 +32,7 @@ for (const f of files) {
     const vb = svg.viewBox.baseVal;
     const rects = [...svg.querySelectorAll('rect')].filter(r => !(r.getAttribute('x') === null))
       .map(r => ({ x: +r.getAttribute('x'), y: +r.getAttribute('y'), w: +r.getAttribute('width'), h: +r.getAttribute('height') }))
-      .filter(r => !(r.x === 0 && r.y === 0 && r.w === vb.width && r.h === vb.height)); // 背景は除く
+      .filter(r => !(r.x === vb.x && r.y === vb.y && r.w === vb.width && r.h === vb.height)); // 背景は除く（viewBox の原点が 0 でない図もある）
     const out = [];
     for (const t of svg.querySelectorAll('text')) {
       const b = t.getBBox();
@@ -41,7 +41,7 @@ for (const f of files) {
       out.push({ text: t.textContent.trim(), bbox: [b.x, b.y, b.width, b.height].map(v => Math.round(v)),
         box: box ? [box.x, box.y, box.w, box.h] : null,
         margins: box ? { left: Math.round(b.x - box.x), right: Math.round(box.x + box.w - (b.x + b.width)), top: Math.round(b.y - box.y), bottom: Math.round(box.y + box.h - (b.y + b.height)) } : null,
-        overflowVB: b.x < 0 || b.y < 0 || b.x + b.width > vb.width || b.y + b.height > vb.height });
+        overflowVB: b.x < vb.x || b.y < vb.y || b.x + b.width > vb.x + vb.width || b.y + b.height > vb.y + vb.height });
     }
     return out;
   });
