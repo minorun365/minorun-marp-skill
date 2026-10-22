@@ -293,9 +293,12 @@ python3 tools/check-dark-gaps.py deck.pdf             # 画像、図、コード
 python3 tools/check-figure-text.py deck.pdf           # 図の中の16pt未満の文字、縁まで14px未満の文字
 node tools/check-svg-box-fit.mjs images/*.svg         # SVGを描画して文字と枠の余白を実測
 node tools/check-svg-contrast.mjs images/*.svg --png /tmp/svg   # 図形と真下の面の明度比。1.25未満でNG
+python3 tools/check-line-breaks.py deck.pdf           # 改行の過不足。1行10字台の積み上げ、読点の後ろの切れ端、原稿に無い自動折り返し
 ```
 
 黒地の下端は、テキストの位置ではなく、黒でないピクセルの最下行で測る。コードの箱も図も挿絵も拾える。
+
+改行の検査は、同じ場所にある同名の `.md` と照合して、原稿で改行したのか自動で折り返したのかを見分ける。改行のしすぎと足りなさは目で見逃しやすいので、NGのページは画像で見てから直す。
 
 NGは全件を列挙してから要約する。先に要約すると、3件目を見落とす。
 
