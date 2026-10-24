@@ -43,6 +43,7 @@ python3 tools/check-dark-margins.py deck.pdf    # 中身の下端と右端の空
 python3 tools/check-dark-gaps.py deck.pdf       # 図や箱と、隣の本文の間隔
 python3 tools/check-figure-text.py deck.pdf     # 図の中の小さい文字、箱の縁に詰まった文字
 python3 tools/check-line-breaks.py deck.pdf     # 改行のしすぎと、読点の後ろの切れ端
+python3 tools/check-bubble-tails.py deck.md     # 吹き出しのしっぽの継ぎ目に線が出る書き方
 node tools/check-svg-box-fit.mjs images/*.svg   # SVGの文字が箱に収まっているか
 node tools/check-svg-contrast.mjs images/*.svg  # SVGの図形が下の面と同じ色で沈んでいないか
 python3 tools/check-reuse-diff.py new.md old.md # 流用したスライドの、見出しと図の対応
