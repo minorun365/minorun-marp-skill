@@ -4,6 +4,7 @@ pdftoppm -r 96 で 1280x720 に焼き、黒でない行の連なりを「帯」�
 高さ 110px 以上の帯（画像・図・箱）と隣の帯の間隔が MIN_GAP 未満なら NG。
 見出しと本文の間、箇条書き同士の間は対象外（帯の高さで区別する）。
 使い方: python3 tools/check-dark-gaps.py <deck>.pdf [--min 36]"""
+import _marp_pdf_guard  # noqa: F401  Speaker Deck 向けに拡大済みのPDFなら止める
 import subprocess, sys, tempfile, os, glob
 from PIL import Image
 

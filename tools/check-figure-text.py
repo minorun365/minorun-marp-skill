@@ -14,6 +14,7 @@ SVG のソースに 21px と書いてあっても、`![center w:820]` で縮め�
 
 必要なもの: mutool（mupdf-tools）、pdfinfo（poppler）、Pillow
 """
+import _marp_pdf_guard  # noqa: F401  Speaker Deck 向けに拡大済みのPDFなら止める
 import html, io, re, subprocess, sys, unicodedata
 from PIL import Image
 

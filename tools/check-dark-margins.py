@@ -6,6 +6,7 @@
        右下のページ番号（幅 140px・高さ 48px の隅）は除外する。全面画像のスライド（bg cover）と、表紙のように下端まで帯を敷いたスライドは対象外。
        必要なもの: pdftoppm（poppler）、Pillow
 """
+import _marp_pdf_guard  # noqa: F401  Speaker Deck 向けに拡大済みのPDFなら止める
 import sys, subprocess, tempfile, os, glob
 from PIL import Image
 

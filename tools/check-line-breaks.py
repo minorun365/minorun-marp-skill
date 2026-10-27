@@ -25,6 +25,7 @@
        同名の .md が無ければ「原稿に無い改行」の代わりに「右端まで伸びている」で見る（`--md` で別の原稿を渡せる）。
 `--debug N` を付けると、N ページの段落ごとの測定値を出す（しきい値の調整用）。
 """
+import _marp_pdf_guard  # noqa: F401  Speaker Deck 向けに拡大済みのPDFなら止める
 import glob
 import html
 import os
