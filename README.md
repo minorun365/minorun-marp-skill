@@ -50,7 +50,7 @@ python3 tools/check-reuse-diff.py new.md old.md # 流用したスライドの、
 python3 tools/check-ai-smell.py deck.md         # 書き換えたスライドの文の型の反復
 ```
 
-検査を通したら、最後に PDF のページ寸法を2倍へ置き換える。Speaker Deck の変換で、スクリーンショットや写真だけが文字より粗くなるのを和らげる。中身は変えない。検査は置き換え前の寸法を前提にしているので、置き換えた PDF を渡すと止まる。
+検査を通したら、最後に PDF のページ寸法を2倍へ置き換える。Speaker Deck の変換で、スクリーンショットや写真だけが文字より粗くなるのを和らげる。置き換える前に元と変換後の全ページを画像で見比べ、見た目が変わったページがあれば置き換えずに止まる。検査は置き換え前の寸法を前提にしているので、置き換えた PDF を渡すと止まる。
 
 ```bash
 uv run tools/pdf-for-speakerdeck.py deck.pdf
