@@ -3,7 +3,7 @@
 # ///
 """見本デッキのPDFから、README に載せる一覧画像を作る。
 
-PC用（preview.png）は横4列、スマホ用（preview-sp.png）は1列。
+PC用（preview.png）は横4列、スマホ用（preview-sp.png）は横3列。
 README は <picture> で画面幅に応じてどちらかを出す。
 
     uv run examples/sample/build-preview.py
@@ -20,7 +20,7 @@ BG = (42, 42, 49)
 # (出力名, 列数, 1枚の幅, 外周の余白, 間隔)
 LAYOUTS = [
     ("preview.png", 4, 480, 5, 10),
-    ("preview-sp.png", 1, 960, 16, 24),
+    ("preview-sp.png", 3, 480, 5, 10),
 ]
 
 
