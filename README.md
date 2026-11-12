@@ -4,7 +4,10 @@
 
 AIにスライドを書かせると、体裁は整うのに話が薄くなりがちです。作者（[@minorun365](https://x.com/minorun365)）が自分の登壇資料を作るなかで、エージェントへ繰り返し伝えてきた直し方を、規則と検査スクリプトに落としました。
 
-![見本デッキ](examples/sample/preview.png)
+<picture>
+  <source media="(max-width: 767px)" srcset="examples/sample/preview-sp.png">
+  <img src="examples/sample/preview.png" alt="見本デッキ">
+</picture>
 
 ## 中身
 
@@ -15,7 +18,7 @@ AIにスライドを書かせると、体裁は整うのに話が薄くなりが
 | `skills/slide-design-dark` | 余白の測り方、縦のバランス、黒地の配色、表とコードのデザイン、Marpの罠 |
 | `theme/minorun-dark.css` | 黒地にシアンの Marp テーマ |
 | `tools/` | 書き出したPDFとSVGを実測する検査スクリプト |
-| `examples/sample` | 見本デッキ。図は `images/build-figs.py` で部品から描く。`examples/broken` は検査が反応することを確かめるための、わざと崩した版 |
+| `examples/sample` | 見本デッキ。図は `images/build-figs.py` で部品から描く。README の一覧画像は `build-preview.py` で作る。`examples/broken` は検査が反応することを確かめるための、わざと崩した版 |
 
 ## 入れ方
 
