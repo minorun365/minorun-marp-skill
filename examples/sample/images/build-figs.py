@@ -63,7 +63,7 @@ write("flow", svg("0 0 1000 210", "\n".join(parts)))
 # 2. 直す前と直したあと。左は脇役の箱、右は主役の色。あいだの大きな矢印は方向の面
 before = ["概念の定義から始まる", "全ページが同じ形", "図の文字が小さい"]
 after = ["聞き手の疑問の順に開く", "1枚に1つのメッセージ", "図の文字は16pt以上"]
-W, CW, RH, RG, TOP = 1000, 380, 72, 22, 60
+W, CW, RH, RG, TOP = 1000, 380, 72, 28, 60
 parts = [text(20 + CW / 2, 34, "AIに任せたまま", 28, fill=GRAY),
          text(W - 20 - CW / 2, 34, "直したあと", 28, fill=LINE, bold=True)]
 for i, (b, a) in enumerate(zip(before, after)):

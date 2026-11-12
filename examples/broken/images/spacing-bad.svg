@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 360" font-family="'Hiragino Sans',sans-serif">
+  <rect x="20" y="20" width="960" height="320" rx="16" fill="#1d2a3a"/>
+  <rect x="60" y="60" width="240" height="90" rx="10" fill="#2f86e0"/>
+  <text x="180" y="112" font-size="22" fill="#fff" text-anchor="middle">苗を植える</text>
+  <rect x="310" y="60" width="240" height="90" rx="10" fill="#2f86e0"/>
+  <text x="430" y="112" font-size="22" fill="#fff" text-anchor="middle">水をやる</text>
+  <line x1="60" y1="190" x2="560" y2="190" stroke="#7fe3f5" stroke-width="3"/>
+  <text x="80" y="206" font-size="20" fill="#fff">毎朝くり返す</text>
+  <text x="80" y="232" font-size="20" fill="#fff">日当たりを見る</text>
+  <text x="80" y="250" font-size="20" fill="#fff">土の乾きを見る</text>
+</svg>
