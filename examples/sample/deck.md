@@ -20,7 +20,17 @@ table td { background:transparent !important; color:#b5b0ba !important; padding:
   border:none !important; border-bottom:1px solid #221f28 !important; }
 table tr:last-child td { border-bottom:none !important; }
 table td:first-child { color:#ffffff !important; font-weight:700; }
-img[alt~="center"] { display:block; margin:40px auto 44px; }
+img[alt~="center"] { display:block; margin:28px auto 32px; }
+.win { margin-top:24px !important; margin-bottom:40px !important; }
+/* 結論：濃い灰色のベタ塗りに白の太字。引用：枠線なし、左端のテーマ色の縦線 */
+.callout { width:88%; margin:30px auto 0; border-radius:18px; padding:20px 40px;
+  background:#555561; color:#ffffff; font-weight:700; text-align:center; font-size:26pt; }
+.quote { position:relative; width:fit-content; max-width:100%; border-radius:4px 12px 12px 4px; padding:18px 36px; margin:26px 0 30px;
+  background:linear-gradient(180deg, rgba(255,255,255,.075), rgba(255,255,255,.02)); }
+.quote::before { content:""; position:absolute; left:0; top:0; bottom:0; width:3px;
+  background:linear-gradient(180deg, #00c4e4, rgba(0,196,228,0)); }
+.quote p { margin:0; font-size:24pt; line-height:1.5; }
+.quote p + p { margin-top:14px; }
 /* 挿絵。右端は本文の左右余白より内側へ。インラインの style 属性は Marp が落とすのでクラスで書く */
 .ill { position:absolute; right:118px; bottom:90px; width:260px; }
 .ill.low { bottom:70px; }
@@ -44,21 +54,27 @@ img[alt~="center"] { display:block; margin:40px auto 44px; }
 
 ---
 
-<!-- _class: crosshead -->
-
-# そのまま登壇に使えましたか？
-
----
-
 # こうなりがち
+
+勉強会の資料をAIに頼むと、だいたいこう仕上がります。
 
 - 全ページが「見出し＋カード3枚」の同じ形
 - 見出しが全部、同じ長さの体言止め
 - 図の文字が小さくて、後ろの席から読めない
 
-体裁は整っているのに、話が頭に残りません
+体裁は整っているのに、**話が頭に残りません**。
 
 <img src="./images/irasutoya-complex-slide.png" class="ill">
+
+---
+
+# 薄さの正体は「聞き手が置き去り」
+
+AIは、書けることを全部、同じ重さで並べてしまいます。
+
+![center w:860](./images/before-after.svg)
+
+直すのは文章の上手さではなく、話の順番と見せ方です。
 
 ---
 
@@ -70,34 +86,61 @@ img[alt~="center"] { display:block; margin:40px auto 44px; }
 
 # 直すのは3か所だけ
 
+話・書き出し・確認の3か所を、この順番で直します。
+
 ![center w:1000](./images/flow.svg)
+
+見た目から直すと、話の順番を変えたときに
+全部やり直しになります。
 
 ---
 
 # 聞き手の疑問の順に話す
 
+スライドの枚数より先に、話の順番を決めます。
+
 - 概念の定義から始めない
 - 中扉には、聞き手の心の声を書く
 - 答えは先に出さず、1スライドずつ開く
 
-アジェンダも、まとめも作りません
-
-<img src="./images/irasutoya-seminar.png" class="ill low">
+<div class="callout">アジェンダも、まとめも作りません</div>
 
 ---
 
 # 見た目は目分量で決めない
 
-| 測るもの | 下限 |
-| --- | --- |
-| 図の中の文字 | 16pt |
-| 文字と箱の縁 | 14px |
-| 図と本文の間隔 | 36px |
-| 中身とスライド下端 | 60px |
+「もう少し余白を」と言われても、値を勘で動かしません。
+
+| 測るもの | 下限 | 測る道具 |
+| --- | --- | --- |
+| 図の中の文字 | 16pt | check-figure-text |
+| 文字と箱の縁 | 14px | check-svg-box-fit |
+| 図と本文の間隔 | 36px | check-dark-gaps |
+| 中身とスライド下端 | 60px | check-dark-margins |
+
+測った数字が、そのまま直す量になります。
+
+---
+
+# エージェントにはこう頼む
+
+検査の名前まで指定しなくても、スキルが手順を知っています。
+
+<div class="quote">
+
+勉強会の20分のスライドを、黒地のテーマで作ってください。<br>聞き手は、AIを使い始めたばかりのエンジニアです。
+
+書き出したら検査を通して、全ページを見てから見せてください。
+
+</div>
+
+聞き手と尺を伝えれば、エージェントが**話の順番から組み立て**ます。
 
 ---
 
 # 書き出したら、検査をまとめて通す
+
+見た目の検査は、書き出したPDFに対して毎回かけます。
 
 <div class="win">
 
@@ -110,6 +153,8 @@ python3 tools/check-figure-text.py deck.pdf
 
 </div>
 
+1つでもNGが出たら、全ページを直してからもう一度。
+
 ---
 
 # …検査が通れば完成！ではないんです
@@ -117,6 +162,8 @@ python3 tools/check-figure-text.py deck.pdf
 - 検査は描かれた要素しか測れない
 - 矢印が消えた図は、全部OKで通ってしまう
 - 最後は全ページを画像にして、<strong>自分の目で見る</strong>
+
+検査OKと目視OKは、別々に報告します。
 
 <img src="./images/irasutoya-magnifier.png" class="ill sm">
 

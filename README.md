@@ -15,7 +15,7 @@ AIにスライドを書かせると、体裁は整うのに話が薄くなりが
 | `skills/slide-design-dark` | 余白の測り方、縦のバランス、黒地の配色、表とコードのデザイン、Marpの罠 |
 | `theme/minorun-dark.css` | 黒地にシアンの Marp テーマ |
 | `tools/` | 書き出したPDFとSVGを実測する検査スクリプト |
-| `examples/sample` | 見本デッキ。`examples/broken` は検査が反応することを確かめるための、わざと崩した版 |
+| `examples/sample` | 見本デッキ。図は `images/build-figs.py` で部品から描く。`examples/broken` は検査が反応することを確かめるための、わざと崩した版 |
 
 ## 入れ方
 

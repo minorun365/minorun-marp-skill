@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 340" font-family="'Zen Maru Gothic','Hiragino Maru Gothic ProN',sans-serif">
+<defs>
+  <marker id="arw" markerUnits="userSpaceOnUse" markerWidth="18" markerHeight="18" refX="16" refY="9" orient="auto">
+    <path d="M0 0L18 9L0 18z" fill="#7fe3f5"/>
+  </marker>
+</defs>
+<text x="210.0" y="34" text-anchor="middle" font-size="28" fill="#a09aa4">AIに任せたまま</text>
+<text x="790.0" y="34" text-anchor="middle" font-size="28" fill="#7fe3f5" font-weight="700">直したあと</text>
+<rect x="20" y="60" width="380" height="72" rx="18" fill="#1f1f27"/>
+<text x="210.0" y="105.0" text-anchor="middle" font-size="26" fill="#ffffff">概念の定義から始まる</text>
+<rect x="600" y="60" width="380" height="72" rx="18" fill="#00849c"/>
+<text x="790.0" y="105.0" text-anchor="middle" font-size="26" fill="#ffffff" font-weight="700">聞き手の疑問の順に開く</text>
+<rect x="20" y="154" width="380" height="72" rx="18" fill="#1f1f27"/>
+<text x="210.0" y="199.0" text-anchor="middle" font-size="26" fill="#ffffff">全ページが同じ形</text>
+<rect x="600" y="154" width="380" height="72" rx="18" fill="#00849c"/>
+<text x="790.0" y="199.0" text-anchor="middle" font-size="26" fill="#ffffff" font-weight="700">1枚に1つのメッセージ</text>
+<rect x="20" y="248" width="380" height="72" rx="18" fill="#1f1f27"/>
+<text x="210.0" y="293.0" text-anchor="middle" font-size="26" fill="#ffffff">図の文字が小さい</text>
+<rect x="600" y="248" width="380" height="72" rx="18" fill="#00849c"/>
+<text x="790.0" y="293.0" text-anchor="middle" font-size="26" fill="#ffffff" font-weight="700">図の文字は16pt以上</text>
+<path d="M428 156.0 H526 V132.0 L572 190.0 L526 248.0 V224.0 H428 Z" fill="#2a2a33"/>
+</svg>
