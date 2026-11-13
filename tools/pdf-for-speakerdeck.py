@@ -51,7 +51,10 @@ def scale_pdf(src: Path, dst: Path, scale: float) -> int:
             form = out.copy_foreign(page.as_form_xobject())
             new = out.add_blank_page(page_size=(w * scale, h * scale))
             new.add_overlay(form, pikepdf.Rectangle(0, 0, w * scale, h * scale))
-        out.save(dst)
+        # pikepdf.new() の版は PDF-1.3（透過の無い版）。元の版を引き継がないと、版を見て
+        # 透過マスクを無視する表示エンジン（スマホアプリの PDF プレビューなど）で、グラデーション文字が
+        # 帯状に塗り潰れ、影が四角になる。透過は 1.4 から。
+        out.save(dst, min_version=max(pdf.pdf_version, "1.4"))
         return len(out.pages)
 
 
