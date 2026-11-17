@@ -116,6 +116,10 @@ for (const f of files) {
       for (const t of texts) {
         if (!t.s) continue;
         const d = gap(im, t);
+        // 縁にかかった文字（一部だけ挿絵に重なる）も拾う。重なると距離が0になり、d > 0 の判定だけでは素通りする。
+        // 挿絵の中に丸ごと収まる文字は、絵の上に載せたラベルとして外す
+        const inside = t.x >= im.x && t.y >= im.y && t.x + t.w <= im.x + im.w && t.y + t.h <= im.y + im.h;
+        if (d === 0 && !inside) out.push(`挿絵 ${Math.round(im.x)},${Math.round(im.y)} と文字「${t.s.slice(0, 14)}」が重なっている（${IMG_PAD}px以上あける）`);
         if (d > 0 && d < IMG_PAD) out.push(`挿絵 ${Math.round(im.x)},${Math.round(im.y)} と文字「${t.s.slice(0, 14)}」の間が ${Math.round(d)}px（${IMG_PAD}px以上）`);
       }
     }
